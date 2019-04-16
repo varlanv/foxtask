@@ -5,6 +5,8 @@ HELP.md
 HELP.md
 mvnw
 mvnw.cmd
+.gitignore
+
 
 ### STS ###
 .apt_generated
