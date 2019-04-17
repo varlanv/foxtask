@@ -18,9 +18,9 @@ CREATE TABLE foxtask.category (
 
 
 CREATE TABLE foxtask.extra_services (
-  id            SERIAL,
-  service       VARCHAR(100) UNIQUE,
-  service_price DECIMAL,
+  id    SERIAL,
+  name  VARCHAR(100) UNIQUE,
+  price DECIMAL,
 
   CONSTRAINT extra_services_pkey PRIMARY KEY (id)
 );
@@ -57,9 +57,9 @@ CREATE TABLE foxtask.booking (
 );
 
 
-CREATE TABLE foxtask.bookings_extra_services (
+CREATE TABLE foxtask.extra_services_bookings (
   booking_id       INT4 REFERENCES foxtask.booking,
   extra_service_id INT4 REFERENCES foxtask.extra_services,
 
-  CONSTRAINT bookings_extra_services_pkey PRIMARY KEY (booking_id, extra_service_id)
+  CONSTRAINT extra_services_bookings_pkey PRIMARY KEY (booking_id, extra_service_id)
 );

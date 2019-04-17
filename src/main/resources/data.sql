@@ -19,6 +19,6 @@ INSERT INTO foxtask.room (number, category_id, available) VALUES
   ('22', '3', true);
 
 
-INSERT INTO foxtask.extra_services (service, service_price) VALUES
+INSERT INTO foxtask.extra_services (name, price) VALUES
   ('cleaning', '10'),
   ('breakfast', '5');

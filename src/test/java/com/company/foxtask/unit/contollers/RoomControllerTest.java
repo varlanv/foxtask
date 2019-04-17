@@ -47,7 +47,7 @@ public class RoomControllerTest {
 
         List<Room> rooms = Arrays.asList(room1, room2, room3);
 
-        when(repository.findAllByCategory("LUX")).thenReturn(rooms.stream()
+        when(repository.findAllByCategory_NameIgnoreCase("LUX")).thenReturn(rooms.stream()
                 .filter(r -> r.getCategory().equals("LUX"))
                 .collect(Collectors.toList()));
 

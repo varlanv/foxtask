@@ -1873,7 +1873,7 @@ bonjour@^3.5.0:
     dns-equal "^1.0.0"
     dns-txt "^2.0.2"
     multicast-dns "^6.0.1"
-    multicast-dns-service-types "^1.1.0"
+    multicast-dns-name-types "^1.1.0"
 
 boolbase@^1.0.0, boolbase@~1.0.0:
   version "1.0.0"
@@ -6260,7 +6260,7 @@ ms@^2.1.1:
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/multicast-dns-service-types/-/multicast-dns-service-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"
+  resolved "https://registry.yarnpkg.com/multicast-dns-name-types/-/multicast-dns-name-types-1.1.0.tgz#899f11d9686e5e05cb91b35d5f0e63b773cfc901"
   integrity sha1-iZ8R2WhuXgXLkbNdXw5jt3PPyQE=
 
 multicast-dns@^6.0.1:

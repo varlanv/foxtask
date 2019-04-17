@@ -6,7 +6,9 @@ class AvailableRoomsList extends Component {
         super(props);
 
         this.state = {
-            rooms: []
+            rooms: [],
+            services: [],
+            roomsByCategory: []
         };
     }
 
@@ -16,12 +18,27 @@ class AvailableRoomsList extends Component {
 
         this.setState({
             rooms: body
+        });
+
+        const services = await fetch("/extra-services");
+        const bod = await services.json();
+
+        this.setState({
+            services: bod
+        });
+        const roomByCategory = await fetch("/rooms/category/LUX");
+        const bode = await roomByCategory.json();
+
+        this.setState({
+            roomsByCategory: bode
         })
     }
 
 
     render() {
         const {rooms} = this.state;
+        const {services} = this.state;
+        const {roomsByCategory} = this.state
 
         return (
             <div>
@@ -32,6 +49,23 @@ class AvailableRoomsList extends Component {
                         </li>
                     ))}
                 </ul>
+
+                <ul>
+                    {services.map(service => (
+                        <li>
+                            {service.name} {service.price}
+                        </li>
+                    ))}
+                </ul>
+
+                <ul>
+                    {roomsByCategory.map(room => (
+                        <li>
+                            {room.number} {room.price}
+                        </li>
+                    ))}
+                </ul>
+
             </div>
         );
     }

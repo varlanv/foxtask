@@ -4,7 +4,7 @@ import com.company.foxtask.model.entity.Booking;
 import com.company.foxtask.model.entity.dto.BookingDto;
 import com.company.foxtask.model.repository.BookingRepository;
 import com.company.foxtask.model.repository.RoomRepository;
-import com.company.foxtask.model.repository.ServiceRepository;
+import com.company.foxtask.model.repository.ExtraServiceRepository;
 import com.company.foxtask.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final UserRepository userRepository;
     @Autowired
-    private ServiceRepository serviceRepository;
+    private ExtraServiceRepository extraServiceRepository;
     @Autowired
     RoomRepository roomRepository;
 
@@ -33,8 +33,8 @@ public class BookingService {
         userRepository.save(dto.getUser());
         Booking booking = new Booking();
         booking.setDateFrom(new Date());
-        dto.getServices().forEach(s -> s = serviceRepository.getOne(s.getId()));
-        booking.setServices(dto.getServices());
+        dto.getExtraServices().forEach(s -> s = extraServiceRepository.getOne(s.getId()));
+        booking.setExtraServices(dto.getExtraServices());
 
         booking.setUser(dto.getUser());
 //        booking.setRoom(roomRepository.getOne(dto.getRoom().getNumber()));

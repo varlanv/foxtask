@@ -1,7 +1,7 @@
 package com.company.foxtask.contollers;
 
+import com.company.foxtask.model.entity.ExtraService;
 import com.company.foxtask.model.entity.Room;
-import com.company.foxtask.model.entity.Service;
 import com.company.foxtask.model.entity.User;
 import com.company.foxtask.model.entity.dto.BookingDto;
 import com.company.foxtask.model.service.BookingService;
@@ -25,7 +25,7 @@ public class BookingController {
 
     @PostMapping("/book")
     public void book(@ModelAttribute BookingDto dto) {
-//        service.performBooking(dto);
+//        name.performBooking(dto);
 
         BookingDto dtoo = new BookingDto();
 
@@ -39,13 +39,13 @@ public class BookingController {
 
         dtoo.setRoom(room);
 
-        List<Service> services = new ArrayList<>();
+        List<ExtraService> extraServices = new ArrayList<>();
 
-        Service serv = new Service();
+        ExtraService serv = new ExtraService();
         serv.setId(1);
         serv.setId(2);
 
-        dtoo.setServices(services);
+        dtoo.setExtraServices(extraServices);
 
         service.performBooking(dtoo);
     }

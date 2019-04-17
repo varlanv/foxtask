@@ -1,6 +1,7 @@
 package com.company.foxtask.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,18 +12,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(schema = "foxtask", name = "extra_services")
-public class Service {
+public class ExtraService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @JsonIgnore
-    @ManyToMany
+    @JsonIgnoreProperties("extraServices")
+    @ManyToMany(mappedBy = "extraServices", fetch = FetchType.LAZY)
     private List<Booking> bookings;
-    private String service;
+    private String name;
     private String price;
 
-    public Service(String service) {
-        this.service = service;
+    public ExtraService(String name) {
+        this.name = name;
     }
 }

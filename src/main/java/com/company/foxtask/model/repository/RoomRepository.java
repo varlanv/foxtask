@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
-    List<Room> findAllByCategory(String category);
+    List<Room> findAllByCategory_NameIgnoreCase(String category);
 }
