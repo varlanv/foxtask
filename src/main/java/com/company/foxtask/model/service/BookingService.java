@@ -1,6 +1,5 @@
 package com.company.foxtask.model.service;
 
-import com.company.foxtask.model.entity.Booking;
 import com.company.foxtask.model.entity.User;
 import com.company.foxtask.model.repository.BookingRepository;
 import com.company.foxtask.model.repository.UserRepository;
@@ -22,7 +21,7 @@ public class BookingService {
     }
 
     @Transactional
-    public void performBooking(User user, Booking booking) {
+    public void performBooking(User user) {
         userRepository.save(user);
     }
 }

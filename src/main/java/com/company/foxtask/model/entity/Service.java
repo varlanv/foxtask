@@ -9,15 +9,17 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "usr", schema = "foxtask")
-public class User {
+@Table(schema = "foxtask", name = "extra_services")
+public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String email;
-    private String firstName;
-    private String lastName;
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany
     private List<Booking> bookings;
+    private String service;
+
+    public Service(Integer id, String service) {
+        this.service = service;
+    }
 }
