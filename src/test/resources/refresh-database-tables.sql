@@ -18,9 +18,9 @@ CREATE TABLE foxtask.category (
 
 
 CREATE TABLE foxtask.extra_services (
-  id            SERIAL,
-  service       VARCHAR(100),
-  service_price DECIMAL,
+  id    SERIAL,
+  name  VARCHAR(100) UNIQUE,
+  price DECIMAL,
 
   CONSTRAINT extra_services_pkey PRIMARY KEY (id)
 );
@@ -29,31 +29,39 @@ CREATE TABLE foxtask.extra_services (
 CREATE TABLE foxtask.room (
   number      INT4 UNIQUE NOT NULL,
   category_id INT4,
+  available   BOOLEAN,
 
   CONSTRAINT room_pkey PRIMARY KEY (number),
   CONSTRAINT category_pkey FOREIGN KEY (category_id) REFERENCES foxtask.category (id)
 );
 
 
-CREATE TABLE foxtask.booking (
-  id                SERIAL,
-  room_id           INT4,
-  extra_services_id INT4,
-  booking_date      DATE,
+CREATE TABLE foxtask.usr (
+  id    SERIAL,
+  email VARCHAR(100),
 
-  CONSTRAINT booking_pkey PRIMARY KEY (id),
-  CONSTRAINT booking_room_fkey FOREIGN KEY (room_id) REFERENCES foxtask.room (number),
-  CONSTRAINT booking_extra_services_fkey FOREIGN KEY (extra_services_id) REFERENCES foxtask.extra_services (id)
+  CONSTRAINT usr_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE foxtask.usr (
-  id          SERIAL,
-  firstname   VARCHAR(100),
-  lastname    VARCHAR(100),
-  bookings_id INT4,
 
-  CONSTRAINT usr_pkey PRIMARY KEY (id),
-  CONSTRAINT usr_bookings_fkey FOREIGN KEY (bookings_id) REFERENCES foxtask.booking (id)
+CREATE TABLE foxtask.booking (
+  id                SERIAL,
+  room_number       INT4,
+  booking_date_from DATE,
+  booking_date_to   DATE,
+  user_id           INT4,
+
+  CONSTRAINT booking_pkey PRIMARY KEY (id),
+  CONSTRAINT booking_user_fkey FOREIGN KEY (user_id) REFERENCES foxtask.usr (id),
+  CONSTRAINT booking_room_fkey FOREIGN KEY (room_number) REFERENCES foxtask.room (number)
+);
+
+
+CREATE TABLE foxtask.extra_services_bookings (
+  booking_id       INT4 REFERENCES foxtask.booking,
+  extra_service_id INT4 REFERENCES foxtask.extra_services,
+
+  CONSTRAINT extra_services_bookings_pkey PRIMARY KEY (booking_id, extra_service_id)
 );
 
 
@@ -63,21 +71,21 @@ INSERT INTO foxtask.category (name, price) VALUES
   ('LUX', '120');
 
 
-INSERT INTO foxtask.room (number, category_id) VALUES
-  ('1', '1'),
-  ('5', '3'),
-  ('10', '2'),
-  ('6', '2'),
-  ('15', '2'),
-  ('20', '1'),
-  ('3', '3'),
-  ('25', '1'),
-  ('21', '3'),
-  ('13', '1'),
-  ('19', '2'),
-  ('22', '3');
+INSERT INTO foxtask.room (number, category_id, available) VALUES
+  ('1', '1', true),
+  ('5', '3', true),
+  ('10', '2', true),
+  ('6', '2', true),
+  ('15', '2', true),
+  ('20', '1', true),
+  ('3', '3', true),
+  ('25', '1', true),
+  ('21', '3', true),
+  ('13', '1', true),
+  ('19', '2', true),
+  ('22', '3', true);
 
 
-INSERT INTO foxtask.extra_services (service, service_price) VALUES
+INSERT INTO foxtask.extra_services (name, price) VALUES
   ('cleaning', '10'),
   ('breakfast', '5');

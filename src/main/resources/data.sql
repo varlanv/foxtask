@@ -20,5 +20,5 @@ INSERT INTO foxtask.room (number, category_id, available) VALUES
 
 
 INSERT INTO foxtask.extra_services (name, price) VALUES
-  ('cleaning', '10'),
-  ('breakfast', '5');
+  ('Cleaning', '10'),
+  ('Breakfast', '5');

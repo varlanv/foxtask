@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ExtraServiceController {
+public class  ExtraServiceController {
 
-    @Autowired
     private final ExtraServiceRepository repository;
 
+    @Autowired
     public ExtraServiceController(ExtraServiceRepository repository) {
         this.repository = repository;
     }

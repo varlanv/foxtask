@@ -17,24 +17,29 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @OneToOne
     @JoinColumn(name = "room_number")
     private Room room;
+
     @JsonIgnoreProperties("bookings")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "booking_date_from")
     private Date dateFrom;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "booking_date_to")
     private Date dateTo;
+
     @JsonIgnoreProperties("bookings")
     @JoinTable(
             schema = "foxtask",
             name = "extra_services_bookings",
             joinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "extra_service_id", referencedColumnName = "id"))
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private List<ExtraService> extraServices;
 }

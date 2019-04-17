@@ -58,7 +58,7 @@ public class RoomControllerTest {
 
         List<Room> list = Arrays.asList(mapper.readValue(responseBody, Room[].class));
 
-        assertThat(list.get(0).getCategory()).isEqualTo("LUX");
-        assertThat(list.get(1).getCategory()).isEqualTo("STANDARD");
+        assertThat(list.get(0).getCategory().getName()).isEqualTo("LUX");
+        assertThat(list.get(1).getCategory().getName()).isEqualTo("STANDARD");
     }
 }
