@@ -6,7 +6,6 @@ import com.company.foxtask.model.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -15,5 +14,4 @@ public class BookingDto {
     private User user;
     private List<Service> services;
     private Room room;
-    private Date date;
 }

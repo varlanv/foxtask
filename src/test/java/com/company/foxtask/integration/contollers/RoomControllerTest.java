@@ -1,6 +1,7 @@
 package com.company.foxtask.integration.contollers;
 
 import com.company.foxtask.contollers.RoomController;
+import com.company.foxtask.model.entity.Category;
 import com.company.foxtask.model.entity.Room;
 import com.company.foxtask.model.repository.RoomRepository;
 import com.company.foxtask.util.RoomTestUtil;
@@ -36,8 +37,8 @@ public class RoomControllerTest {
 
     @Before
     public void mock_repository() {
-        Room room = RoomTestUtil.createRoom(5, "LUX", "125");
-        Room room2 = RoomTestUtil.createRoom(3, "STANDARD", "50");
+        Room room = RoomTestUtil.createRoom(5, new Category("LUX", "125"));
+        Room room2 = RoomTestUtil.createRoom(3, new Category("STANDARD", "50"));
 
         when(repository.findAll()).thenReturn(Arrays.asList(room, room2));
     }

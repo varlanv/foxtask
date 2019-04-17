@@ -1,14 +1,14 @@
 package com.company.foxtask.util;
 
+import com.company.foxtask.model.entity.Category;
 import com.company.foxtask.model.entity.Room;
 
 public class RoomTestUtil {
 
-    public static Room createRoom(int number, String category, String price) {
+    public static Room createRoom(int number, Category category) {
         Room room = new Room();
         room.setNumber(number);
         room.setCategory(category);
-        room.setPrice(price);
         return room;
     }
 }

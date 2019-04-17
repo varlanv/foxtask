@@ -1,6 +1,7 @@
 package com.company.foxtask.unit.contollers;
 
 import com.company.foxtask.contollers.RoomController;
+import com.company.foxtask.model.entity.Category;
 import com.company.foxtask.model.entity.Room;
 import com.company.foxtask.model.repository.RoomRepository;
 import com.company.foxtask.util.RoomTestUtil;
@@ -40,9 +41,9 @@ public class RoomControllerTest {
 
     @Test
     public void controller_should_find_all_by_category() {
-        Room room1 = RoomTestUtil.createRoom(4, "LUX", "125");
-        Room room2 = RoomTestUtil.createRoom(2, "DOUBLE", "100");
-        Room room3 = RoomTestUtil.createRoom(5, "LUX", "125");
+        Room room1 = RoomTestUtil.createRoom(4, new Category("LUX", "125"));
+        Room room2 = RoomTestUtil.createRoom(2, new Category("DOUBLE", "100"));
+        Room room3 = RoomTestUtil.createRoom(5, new Category("LUX", "125"));
 
         List<Room> rooms = Arrays.asList(room1, room2, room3);
 

@@ -29,6 +29,7 @@ CREATE TABLE foxtask.extra_services (
 CREATE TABLE foxtask.room (
   number      INT4 UNIQUE NOT NULL,
   category_id INT4,
+  available   BOOLEAN,
 
   CONSTRAINT room_pkey PRIMARY KEY (number),
   CONSTRAINT category_pkey FOREIGN KEY (category_id) REFERENCES foxtask.category (id)
@@ -36,24 +37,23 @@ CREATE TABLE foxtask.room (
 
 
 CREATE TABLE foxtask.usr (
-  id         SERIAL,
-  first_name VARCHAR(100),
-  last_name  VARCHAR(100),
-  email      VARCHAR(100),
+  id    SERIAL,
+  email VARCHAR(100),
 
   CONSTRAINT usr_pkey PRIMARY KEY (id)
 );
 
 
 CREATE TABLE foxtask.booking (
-  id           SERIAL,
-  room_id      INT4,
-  booking_date DATE,
-  user_id      INT4,
+  id                SERIAL,
+  room_number       INT4,
+  booking_date_from DATE,
+  booking_date_to   DATE,
+  user_id           INT4,
 
   CONSTRAINT booking_pkey PRIMARY KEY (id),
   CONSTRAINT booking_user_fkey FOREIGN KEY (user_id) REFERENCES foxtask.usr (id),
-  CONSTRAINT booking_room_fkey FOREIGN KEY (room_id) REFERENCES foxtask.room (number)
+  CONSTRAINT booking_room_fkey FOREIGN KEY (room_number) REFERENCES foxtask.room (number)
 );
 
 

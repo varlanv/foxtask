@@ -28,7 +28,7 @@ CREATE TABLE foxtask.extra_services (
 
 CREATE TABLE foxtask.room (
   number      INT4 UNIQUE NOT NULL,
-  category_id INT4,
+  category_id INT4 UNIQUE,
 
   CONSTRAINT room_pkey PRIMARY KEY (number),
   CONSTRAINT category_pkey FOREIGN KEY (category_id) REFERENCES foxtask.category (id)
