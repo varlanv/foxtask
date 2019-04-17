@@ -18,8 +18,9 @@ public class Service {
     @ManyToMany
     private List<Booking> bookings;
     private String service;
+    private String price;
 
-    public Service(Integer id, String service) {
+    public Service(String service) {
         this.service = service;
     }
 }

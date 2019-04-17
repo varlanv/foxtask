@@ -1,6 +1,6 @@
 package com.company.foxtask.model.service;
 
-import com.company.foxtask.model.entity.User;
+import com.company.foxtask.model.entity.dto.BookingDto;
 import com.company.foxtask.model.repository.BookingRepository;
 import com.company.foxtask.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ public class BookingService {
     }
 
     @Transactional
-    public void performBooking(User user) {
-        userRepository.save(user);
+    public void performBooking(BookingDto dto) {
     }
 }
