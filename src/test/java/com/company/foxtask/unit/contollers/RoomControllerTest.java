@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoomControllerTest {
@@ -41,15 +41,16 @@ public class RoomControllerTest {
 
     @Test
     public void controller_should_find_all_by_category() {
-        Room room1 = RoomTestUtil.createRoom(4, new Category("LUX", "125"));
-        Room room2 = RoomTestUtil.createRoom(2, new Category("DOUBLE", "100"));
-        Room room3 = RoomTestUtil.createRoom(5, new Category("LUX", "125"));
+        Room room1 = RoomTestUtil.createRoom(4, new Category("LUX"));
+        Room room2 = RoomTestUtil.createRoom(2, new Category("DOUBLE"));
+        Room room3 = RoomTestUtil.createRoom(5, new Category("LUX"));
 
         List<Room> rooms = Arrays.asList(room1, room2, room3);
 
         when(repository.findAllByCategory_NameIgnoreCase("LUX")).thenReturn(rooms.stream()
                 .filter(r -> r.getCategory().equals("LUX"))
                 .collect(Collectors.toList()));
+
 
 
         assertThat(controller.findByCategory("LUX")).allMatch(room -> room.getCategory().equals("LUX"));

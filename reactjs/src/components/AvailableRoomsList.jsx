@@ -50,21 +50,21 @@ class AvailableRoomsList extends Component {
                     ))}
                 </ul>
 
-                <ul>
-                    {services.map(service => (
-                        <li>
-                            {service.name} {service.price}
-                        </li>
-                    ))}
-                </ul>
+                {/*<ul>*/}
+                    {/*{services.map(service => (*/}
+                        {/*<li>*/}
+                            {/*{service.name} {service.price}*/}
+                        {/*</li>*/}
+                    {/*))}*/}
+                {/*</ul>*/}
 
-                <ul>
-                    {roomsByCategory.map(room => (
-                        <li>
-                            {room.number} {room.price}
-                        </li>
-                    ))}
-                </ul>
+                {/*<ul>*/}
+                    {/*{roomsByCategory.map(room => (*/}
+                        {/*<li>*/}
+                            {/*{room.number} {room.price}*/}
+                        {/*</li>*/}
+                    {/*))}*/}
+                {/*</ul>*/}
 
             </div>
         );

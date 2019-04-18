@@ -9,9 +9,8 @@ CREATE SCHEMA foxtask;
 
 
 CREATE TABLE foxtask.category (
-  id    SERIAL,
-  name  VARCHAR(100) UNIQUE NOT NULL,
-  price DECIMAL,
+  id   SERIAL,
+  name VARCHAR(100) UNIQUE NOT NULL,
 
   CONSTRAINT categorya_pkey PRIMARY KEY (id)
 );
@@ -30,6 +29,7 @@ CREATE TABLE foxtask.room (
   number      INT4 UNIQUE NOT NULL,
   category_id INT4,
   available   BOOLEAN,
+  price       DECIMAL,
 
   CONSTRAINT room_pkey PRIMARY KEY (number),
   CONSTRAINT category_pkey FOREIGN KEY (category_id) REFERENCES foxtask.category (id)
@@ -47,8 +47,8 @@ CREATE TABLE foxtask.usr (
 CREATE TABLE foxtask.booking (
   id                SERIAL,
   room_number       INT4,
-  booking_date_from DATE,
-  booking_date_to   DATE,
+  booking_date_from TIMESTAMP,
+  booking_date_to   TIMESTAMP,
   user_id           INT4,
 
   CONSTRAINT booking_pkey PRIMARY KEY (id),

@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -16,9 +19,9 @@ public class Room {
     @Id
     private Integer number;
     private boolean available;
+    private String price;
     @JsonUnwrapped
     @JsonIgnoreProperties("rooms")
     @ManyToOne
     private Category category;
-
 }

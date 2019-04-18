@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -22,17 +22,15 @@ public class Booking {
     @JoinColumn(name = "room_number")
     private Room room;
 
-    @JsonIgnoreProperties("bookings")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "bookings"})
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "booking_date_from")
-    private Date dateFrom;
+    private LocalDateTime dateFrom;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "booking_date_to")
-    private Date dateTo;
+    private LocalDateTime dateTo;
 
     @JsonIgnoreProperties("bookings")
     @JoinTable(

@@ -37,8 +37,8 @@ public class RoomControllerTest {
 
     @Before
     public void mock_repository() {
-        Room room = RoomTestUtil.createRoom(5, new Category("LUX", "125"));
-        Room room2 = RoomTestUtil.createRoom(3, new Category("STANDARD", "50"));
+        Room room = RoomTestUtil.createRoom(5, new Category("LUX"));
+        Room room2 = RoomTestUtil.createRoom(3, new Category("STANDARD"));
 
         when(repository.findAll()).thenReturn(Arrays.asList(room, room2));
     }

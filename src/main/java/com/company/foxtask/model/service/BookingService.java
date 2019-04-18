@@ -13,20 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class BookingService {
 
-    private final BookingRepository bookingRepository;
-    private final UserRepository userRepository;
     @Autowired
     private ExtraServiceRepository extraServiceRepository;
     @Autowired
-    RoomRepository roomRepository;
+    private RoomRepository roomRepository;
+    private final BookingRepository bookingRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public BookingService(BookingRepository bookingRepository, UserRepository userRepository) {
@@ -36,18 +37,12 @@ public class BookingService {
 
     @Transactional
     public void performBooking(BookingDto dto) {
-        dto.setUserEmail("email");
-        dto.setRoomNumber(5);
-        dto.setDateFrom(new Date());
-        dto.setDateTo(new Date());
-        dto.setServices(new ArrayList<String>(Arrays.asList("Cleaning", "Breakfast")));
 
-
-        List<ExtraService> extraServices = new ArrayList<>();
-
-
-        dto.getServices().forEach(s -> extraServices.add(extraServiceRepository.findByName(s)));
-
+        List<ExtraService> extraServices =
+                dto.getServices()
+                        .stream()
+                        .map(extraServiceRepository::findByName)
+                        .collect(Collectors.toList());
 
         Booking booking = new Booking();
 
@@ -64,7 +59,31 @@ public class BookingService {
         booking.setDateTo(dto.getDateTo());
         booking.setExtraServices(extraServices);
 
-
         bookingRepository.save(booking);
+    }
+
+    public List<Booking> findAll() {
+        return bookingRepository.findAll();
+    }
+
+    public String priceForAllBookings(Integer userId) {
+        List<Booking> bookings = bookingRepository.findAllByUser_Id(userId);
+        BigDecimal decimal = new BigDecimal("0");
+
+
+        for (Booking booking : bookings) {
+
+            decimal = decimal.add(new BigDecimal(booking.getRoom().getPrice()));
+
+            List<ExtraService> extraServices = booking.getExtraServices();
+
+            for (ExtraService extraService : extraServices) {
+                decimal = decimal.add(new BigDecimal(extraService.getPrice()));
+            }
+
+            decimal = decimal.multiply(new BigDecimal(DAYS.between(booking.getDateFrom(), booking.getDateTo())));
+        }
+
+        return decimal.toPlainString();
     }
 }

@@ -16,12 +16,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String price;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    public Category(String name, String price) {
+    public Category(String name) {
         this.name = name;
-        this.price = price;
     }
 }
