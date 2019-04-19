@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-public class  ExtraServiceController {
+public class ExtraServiceController {
 
     private final ExtraServiceRepository repository;
 
@@ -21,5 +22,12 @@ public class  ExtraServiceController {
     @GetMapping("/extra-services")
     public List<ExtraService> getAll() {
         return repository.findAll();
+    }
+
+    @GetMapping("/extra-services/name")
+    public List<String> getAllNames() {
+        return repository.findAll().stream()
+                .map(ExtraService::getName)
+                .collect(Collectors.toList());
     }
 }

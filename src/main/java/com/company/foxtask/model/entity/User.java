@@ -20,4 +20,8 @@ public class User {
     @JsonIgnoreProperties("user")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Booking> bookings;
+
+    public User(String email) {
+        this.email = email;
+    }
 }

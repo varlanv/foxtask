@@ -49,8 +49,10 @@ public class BookingService {
         Room room = roomRepository.getOne(dto.getRoomNumber());
         room.setAvailable(false);
 
-        User user = new User();
-        user.setEmail(dto.getUserEmail());
+        User user = userRepository
+                .findByEmail(dto.getUserEmail())
+                .orElse(new User(dto.getUserEmail()));
+
 
         booking.setRoom(room);
         booking.setUser(user);

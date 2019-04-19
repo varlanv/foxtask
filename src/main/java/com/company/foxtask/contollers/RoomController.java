@@ -28,4 +28,5 @@ public class RoomController {
     public List<Room> findByCategory(@PathVariable String category) {
         return repository.findAllByCategory_NameIgnoreCase(category);
     }
+
 }

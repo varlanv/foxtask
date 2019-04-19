@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -27,10 +27,10 @@ public class Booking {
     private User user;
 
     @Column(name = "booking_date_from")
-    private LocalDateTime dateFrom;
+    private LocalDate dateFrom;
 
     @Column(name = "booking_date_to")
-    private LocalDateTime dateTo;
+    private LocalDate dateTo;
 
     @JsonIgnoreProperties("bookings")
     @JoinTable(

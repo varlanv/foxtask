@@ -21,7 +21,7 @@ public class Room {
     private boolean available;
     private String price;
     @JsonUnwrapped
-    @JsonIgnoreProperties("rooms")
+    @JsonIgnoreProperties("bookings")
     @ManyToOne
     private Category category;
 }

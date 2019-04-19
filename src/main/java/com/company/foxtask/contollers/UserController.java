@@ -36,7 +36,12 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}/bookings/price")
-    public String totalPrice(@PathVariable Integer id) {
+    public String totalPriceById(@PathVariable Integer id) {
         return bookingService.priceForAllBookings(id);
     }
+
+//    @GetMapping("/user/{email}/bookings/price")
+//    public String totalPriceByEmail(@PathVariable String email) {
+//        return bookingService.priceForAllBookings(email);
+//    }
 }

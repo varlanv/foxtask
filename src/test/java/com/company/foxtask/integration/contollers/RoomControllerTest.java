@@ -45,14 +45,14 @@ public class RoomControllerTest {
 
     @Test
     public void controller_should_return_200() throws Exception {
-        mockMvc.perform(get("/rooms"))
+        mockMvc.perform(get("/bookings"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
 
     @Test
     public void controller_should_return_rooms_list() throws Exception {
-        String responseBody = mockMvc.perform(get("/rooms"))
+        String responseBody = mockMvc.perform(get("/bookings"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
