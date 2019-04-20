@@ -29,13 +29,13 @@ public class BookingController {
         return service.findAll();
     }
 
-    @GetMapping("/user/{id}/bookings")
-    public List<Booking> allUserBookings(@PathVariable Integer id) {
-        return service.findAllByUserId(id);
+    @GetMapping("/user/{email}/bookings")
+    public List<Booking> allBookingsByEmail(@PathVariable String email) {
+        return service.findAllByUserEmail(email);
     }
 
-    @GetMapping("/user/{id}/bookings/price")
-    public String totalPriceById(@PathVariable Integer id) {
-        return service.priceForAllUserBookings(id);
+    @GetMapping("/user/{email}/bookings/price")
+    public String totalPriceByEmail(@PathVariable String email) {
+        return service.priceForAllUserBookings(email);
     }
 }

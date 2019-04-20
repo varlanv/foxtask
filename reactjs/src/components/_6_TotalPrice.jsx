@@ -14,30 +14,41 @@ class _6_TotalPrice extends Component {
 
     async fetchBookingsByUserId(event) {
         event.preventDefault();
-        const userId = document.getElementById("user-id-inputt").value;
+        const userEmail = document.getElementById("user-email-inp").value;
 
-        const request = await fetch(`user/${userId}/bookings/price`);
-        const body = await request.json();
+        await fetch(`user/${userEmail}/bookings/price`).then(response => {
+            if (response.ok) {
+                response.json()
+                    .then(json => {
+                        this.setState({price: `Total price:  ${json}`});
+                    })
+            } else {
+                this.setState({
+                    price: ""
+                })
 
-        this.setState({
-            price: body
-        })
+            }
+        });
+
     }
 
     render() {
-        const {price} = this.state;
+        const price = this.state.price;
 
         return (
-            <div className="wrapper">
-                <h2>6. User can get the total price of the booking (room for dates period + cost of additional options).</h2>
-                <form onSubmit={this.fetchBookingsByUserId}>
-                    <input id="user-id-inputt" type="text" name="id"/>
-                    <input type="submit" name="submit"/>
-                </form>
-                {price}
+            <div>
+                <h2>6. User can get the total price of the booking (room for dates period + cost of additional options).
+                </h2>
+                <div className="wrapper">
+                    <form onSubmit={this.fetchBookingsByUserId}>
+                        <input id="user-email-inp" type="text" name="id" placeholder="user email"/>
+                        <input type="submit" name="submit"/>
+                    </form>
+                    {price}
+                </div>
             </div>
 
-        );
+        )
     }
 }
 

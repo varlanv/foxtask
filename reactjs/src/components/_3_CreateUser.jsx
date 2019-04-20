@@ -37,12 +37,14 @@ class _3_CreateUser extends Component {
     render() {
 
         return (
-            <div className="wrapper">
+            <div>
                 <h2>3. Create user.</h2>
-                <form onSubmit={this.handleCreateUser}>
-                    <input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <div className="wrapper">
+                    <form onSubmit={this.handleCreateUser}>
+                        <input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange}/>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                </div>
             </div>
         );
     }

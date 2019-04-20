@@ -11,30 +11,40 @@ class _1_RoomList extends Component {
     }
 
     async componentWillMount() {
-        const request = await fetch("/bookings");
-        const body = await request.json();
-
-        this.setState({
-            bookings: body
-        });
-
+     await fetch("/rooms")
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                        .then(json => {
+                            this.setState({rooms: json});
+                        })
+                } else {
+                    this.setState({rooms: []})
+                }
+            });
     }
 
     render() {
         const {rooms} = this.state;
 
         return (
-            <div className="wrapper">
-                <ul>
-                    <h2>1. View list of available rooms (room have a number, category, price, additional options like
-                        breakfast, cleaning with additional cost) for specified dates.
-                    </h2>
-                    {rooms.map(room => (
-                        <li>
-                            {"Room number " + room.number}, {"Type: " + room.name} {"Price: " + room.price}
-                        </li>
-                    ))}
-                </ul>
+            <div>
+                <h2>1. View list of available rooms (room have a number, category, price, additional options like
+                    breakfast, cleaning with additional cost) for specified dates.
+                </h2>
+                <div className="wrapper">
+                    <ul>
+
+                        {rooms.map(room => (
+                            <li className="room-list">
+                                <p>{`Room number: ${room.number}`}</p>
+                                <p>{`Room type: ${room.name}`}</p>
+                                <p>{`Room price: ${room.price}`}</p>
+                                <p>{`Available: ${room.available}`}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         );
     }

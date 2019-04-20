@@ -44,6 +44,10 @@ public class BookingService {
         return bookingRepository.findAllByUser_Id(id);
     }
 
+    public List<Booking> findAllByUserEmail(String email) {
+        return bookingRepository.findAllByUser_Email(email);
+    }
+
     @Transactional
     public void performBooking(BookingDto dto) {
         Booking booking = new Booking();
@@ -71,8 +75,8 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
-    public String priceForAllUserBookings(Integer userId) {
-        List<Booking> bookings = bookingRepository.findAllByUser_Id(userId);
+    public String priceForAllUserBookings(String email) {
+        List<Booking> bookings = bookingRepository.findAllByUser_Email(email);
         BigDecimal result = new BigDecimal("0");
 
         for (Booking booking : bookings) {

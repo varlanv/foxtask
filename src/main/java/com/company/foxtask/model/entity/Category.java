@@ -1,5 +1,6 @@
 package com.company.foxtask.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @JsonIgnoreProperties("rooms")
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Room> rooms;
 

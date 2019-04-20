@@ -77,37 +77,38 @@ class _4_Booking extends Component {
         const {services} = this.props;
 
         return (
-            <div className="wrapper">
-                <h2>4. User can book the room for specified days.
-                </h2>
-                <form onSubmit={this.handleBook}>
-                    <div>
-                        <label>Booking date from:
-                            <input type="date" name="dateFrom" min="2019-04-18" max="2019-12-31"
-                                   onChange={this.handleDateFrom} required/>
-                        </label>
-                        <label>Booking date to:
-                            <input type="date" name="dateTo" min="2019-04-18" max="2019-12-31"
-                                   onChange={this.handleDateTo} required/>
-                        </label>
-                        <label>Email:
-                            <input type="text" name="userEmail" onChange={this.handleEmail} required/>
-                        </label>
-                        <label>Room number:
-                            <input type="number" name="roomNumber" onChange={this.handleRoomNumber} required/>
-                        </label>
-                        <label>
-                            Services:
-                            {services.map(serv => (
-                                <label> {serv}
-                                    <input type="checkbox" name="services" value={serv}
-                                           onChange={this.handleCheckBox.bind(this)}/>
-                                </label>
-                            ))}
-                        </label>
-                    </div>
-                    <input type="submit" value="Submit"/>
-                </form>
+            <div>
+                <h2>4. User can book the room for specified days.</h2>
+                <div className="wrapper">
+                    <form onSubmit={this.handleBook}>
+                        <div id="_4booking">
+                            <label>Booking date from:
+                                <input type="date" name="dateFrom" min="2019-04-01" max="2019-04-30"
+                                       onChange={this.handleDateFrom} required/>
+                            </label>
+                            <label>Booking date to:
+                                <input type="date" name="dateTo" min="2019-04-01" max="2019-04-30" onChange={this.handleDateTo} required/>
+                            </label>
+                            <label>Email:
+                                <input type="text" name="userEmail" onChange={this.handleEmail} required/>
+                            </label>
+                            <label>Room number:
+                                <input type="number" min="1" max="20" name="roomNumber" onChange={this.handleRoomNumber}
+                                       required/>
+                            </label>
+                            <label>
+                                Services:
+                                {services.map(serv => (
+                                    <label> {serv}
+                                        <input type="checkbox" name="services" value={serv}
+                                               onChange={this.handleCheckBox.bind(this)}/>
+                                    </label>
+                                ))}
+                            </label>
+                        </div>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                </div>
             </div>
         );
     }

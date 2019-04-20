@@ -77,9 +77,9 @@ public class BookingServiceTest {
         booking.setDateTo(LocalDate.now().plusDays(10));
         booking.setExtraServices(asList(service1, service2));
 
-        when(bookingRepository.findAllByUser_Id(1)).thenReturn(asList(booking, booking));
+        when(bookingRepository.findAllByUser_Email("qwer")).thenReturn(asList(booking, booking));
 
-        String totalPrice = service.priceForAllUserBookings(1);
+        String totalPrice = service.priceForAllUserBookings("qwer");
 
         assertEquals(totalPrice, "2300"); /* (roomprice(100) + service(10) + service(5)) * days(10) * bookings(2))*/
     }
@@ -88,7 +88,7 @@ public class BookingServiceTest {
     public void should_find_all_bookings_by_user_id() {
         Booking booking = new Booking();
         List<Booking> bookingList = singletonList(booking);
-        when(bookingRepository.findAllByUser_Id(1)).thenReturn(bookingList);
-        assertEquals(service.findAllByUserId(1), bookingList);
+        when(bookingRepository.findAllByUser_Email("qwer")).thenReturn(bookingList);
+        assertEquals(service.findAllByUserEmail("qwer"), bookingList);
     }
 }

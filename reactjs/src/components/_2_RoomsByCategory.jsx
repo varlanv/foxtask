@@ -26,12 +26,17 @@ class _2_RoomsByCategory extends Component {
 
     async fetchRoomsByCategory(event) {
         event.preventDefault();
-        const request = await fetch(`rooms/category/${this.state.categoryRadio}`);
-        const body = await request.json();
-
-        this.setState({
-            bookings: body
-        })
+        await fetch(`rooms/category/${this.state.categoryRadio}`)
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                        .then(json => {
+                            this.setState({rooms: json});
+                        })
+                } else {
+                    this.setState({rooms: []})
+                }
+            })
     }
 
     handleCategoryChange(event) {
@@ -46,24 +51,31 @@ class _2_RoomsByCategory extends Component {
 
         return (
             <div>
-                <form onSubmit={this.fetchRoomsByCategory}>
-                    <h2>2. View rooms filtered by category.</h2>
-                    {categories.map(category => (<div>
-                            <label htmlFor="category-checkbox">{category.name}</label>
-                            <input type="radio" className="category-checkbox" name="name" value={category.name}
-                                   onChange={this.handleCategoryChange}/>
-                        </div>
-                    ))}
-                    <input type="submit" value="Submit"/>
-                </form>
+                <h2>2. View rooms filtered by category.</h2>
                 <div className="wrapper">
-                    <ul>
-                        {rooms.map(room => (
-                            <li>
-                                {"Room number " + room.number}, {"Type: " + room.name} {"Price: " + room.price}
-                            </li>
+                    <form onSubmit={this.fetchRoomsByCategory}>
+                        {categories.map(category => (<div>
+                                <label htmlFor="category-checkbox">{category.name}</label>
+                                <input type="radio" className="category-checkbox" name="name"
+                                       value={category.name}
+                                       onChange={this.handleCategoryChange}/>
+                            </div>
                         ))}
-                    </ul>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                    <div>
+                        <ul>
+                            {rooms.map(room => (
+                                <li className="room-list">
+                                    <p>{`Room number: ${room.number}`}</p>
+                                    <p>{`Room type: ${room.name}`}</p>
+                                    <p>{`Room price: ${room.price}`}</p>
+                                    <p>{`Available: ${room.available}`}</p>
+
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );

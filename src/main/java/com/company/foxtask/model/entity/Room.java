@@ -22,7 +22,7 @@ public class Room {
     private String price;
 
     @JsonUnwrapped
-    @JsonIgnoreProperties("bookings")
+    @JsonIgnoreProperties("rooms")
     @ManyToOne
     private Category category;
 

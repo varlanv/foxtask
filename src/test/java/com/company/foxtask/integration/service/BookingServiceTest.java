@@ -34,15 +34,15 @@ public class BookingServiceTest {
 
     @Test
     public void should_calculate_price_for_all_bookings() {
-        BookingDto dto1 = BookingDtoUtil.build("qwerty", 5, LocalDate.now(), LocalDate.now().plusDays(1), asList("Cleaning", "Breakfast"));
-        BookingDto dto2 = BookingDtoUtil.build("qwerty", 10, LocalDate.now(), LocalDate.now().plusDays(2), emptyList());
+        BookingDto dto1 = BookingDtoUtil.build("qwer", 5, LocalDate.now(), LocalDate.now().plusDays(1), asList("Cleaning", "Breakfast"));
+        BookingDto dto2 = BookingDtoUtil.build("qwer", 10, LocalDate.now(), LocalDate.now().plusDays(2), emptyList());
         service.performBooking(dto1);
 
-        assertEquals(service.priceForAllUserBookings(1), "135"); // roomprice(120) + service(5) + service(10)
+        assertEquals(service.priceForAllUserBookings("qwer"), "90"); // roomprice(75) + service(5) + service(10)
 
         service.performBooking(dto2);
 
-        assertEquals(service.priceForAllUserBookings(1), "285"); // roomprice(75) * days(2) + previousbooking(135)
+        assertEquals(service.priceForAllUserBookings("qwer"), "190"); // roomprice(50) * days(2) + previousbooking(90)
     }
 
     @Test(expected = RoomIsTakenException.class)

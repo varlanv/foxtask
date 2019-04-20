@@ -73,13 +73,13 @@ public class BookingControllerTest {
     }
 
     @Test
-    public void controller_should_return_all_bookings_by_user_id() throws Exception {
+    public void controller_should_return_all_bookings_by_user_email() throws Exception {
         Booking booking1 = new Booking();
         booking1.setId(2);
 
-        when(controller.allUserBookings(2)).thenReturn(asList(booking1));
+        when(controller.allBookingsByEmail("qwe")).thenReturn(asList(booking1));
 
-        String contentAsString = mockMvc.perform(get("/user/2/bookings").contentType(MediaType.APPLICATION_JSON))
+        String contentAsString = mockMvc.perform(get("/user/qwe/bookings").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
@@ -90,9 +90,9 @@ public class BookingControllerTest {
 
     @Test
     public void price_for_all_user_bookings() throws Exception {
-        when(service.priceForAllUserBookings(3)).thenReturn("100");
+        when(service.priceForAllUserBookings("qwe")).thenReturn("100");
 
-        String contentAsString = mockMvc.perform(get("/user/3/bookings/price").content(MediaType.APPLICATION_JSON_VALUE))
+        String contentAsString = mockMvc.perform(get("/user/qwe/bookings/price").content(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();

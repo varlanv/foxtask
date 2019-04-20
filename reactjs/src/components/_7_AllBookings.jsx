@@ -24,17 +24,23 @@ class _7_AllBookings extends Component {
         const {bookings} = this.state;
 
         return (
-            <div className="wrapper">
-                <ul>
-                    <h2>7. View all bookings for the hotel.
+            <div>
+                <h2>7. View all bookings for the hotel.</h2>
 
-                    </h2>
-                    {bookings.map(booking => (
-                        <li>
-                            {JSON.stringify(booking)}
-                        </li>
-                    ))}
-                </ul>
+                <div className="wrapper">
+                    <ul>
+                        {bookings.map(b => (
+                            <li className="user-bookings">
+                                <p>{`User email:  ${b.user.email}`}</p>
+                                <p>{`Room number: ${b.room.number}`}</p>
+                                <p>{`Room type: ${b.room.name}`}</p>
+                                <p>{`Room price: ${b.room.price}`}</p>
+                                <p>{`From: ${b.dateFrom}`}</p>
+                                <p>{`To: ${b.dateTo}`}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         );
     }

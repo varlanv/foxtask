@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import _1_RoomList from "./_1_RoomList";
 import _2_RoomsByCategory from "./_2_RoomsByCategory";
-import _3_CreateUser from "./_3_CreateUser";
 import _4_Booking from "./_4_Booking";
 import _5_BookingsView from "./_5_BookingsView";
 import _6_TotalPrice from "./_6_TotalPrice";
@@ -13,26 +12,50 @@ class App extends Component {
         super(props);
 
         this.state = {
-            services: []
+            services: [],
+            bookings: []
         };
-
+        this.clearDatabase = this.clearDatabase.bind(this);
     }
 
     async componentWillMount() {
-        const req = await fetch("/extra-services/name");
-        const body = await req.json();
+        await fetch("/extra-services/name").then(response => {
+            if (response.ok) {
+                response.json()
+                    .then(json => {
+                        this.setState({services: json});
+                    })
+            } else {
+                this.setState({services: []})
+            }
+        });
 
-        this.setState({
-            services: body
+        await fetch(`bookings`)
+            .then(response => {
+                if (response.ok) {
+                    response.json()
+                        .then(json => {
+                            this.setState({bookings: json});
+                        })
+                } else {
+                    this.setState({bookings: []})
+                }
+            })
+    }
+
+    clearDatabase() {
+        fetch("/delete-all", {
+            method: "DELETE"
         })
     }
 
     render() {
         return (
-            <div>
+            <div id="main-wrapper">
+                <button id="big-red-button" onClick={this.clearDatabase}>Refresh database (for demonstration)</button>
                 <_1_RoomList/>
                 <_2_RoomsByCategory/>
-                <_3_CreateUser/>
+                {/*<_3_CreateUser/>*/}
                 <_4_Booking services={this.state.services}/>
                 <_5_BookingsView/>
                 <_6_TotalPrice/>

@@ -1,4 +1,43 @@
+* {
+    margin: 0;
+
+    font-size: 100%;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    vertical-align: baseline;
+    list-style: none;
+}
+
 .wrapper {
-    border-bottom: 5px solid black;
+    border: 3px solid black;
     margin: 20px 0;
+    width: 80%;
+}
+
+#main-wrapper {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.room-list p {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.room-list {
+    margin-bottom: 20px;
+}
+
+#_4booking input {
+    display: block;
+}
+
+#big-red-button{
+    margin-left: 500px;
+    background-color: rgba(219, 0, 4, 0.78);
+}
+
+.user-bookings{
+    margin: 0 10px;
+    display: inline-block;
 }
