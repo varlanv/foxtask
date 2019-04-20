@@ -61,18 +61,21 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
                         <id>install node and npm</id>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
                         <configuration>
-                            <nodeVersion>v8.12.0</nodeVersion>
-                            <npmVersion>6.4.1</npmVersion>
+                            <arguments>install</arguments>
                         </configuration>
                     </execution>
                     <execution>
-                        <phase>prepare-package</phase>
                         <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
@@ -87,7 +90,6 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
                         <configuration>
                             <target>
                                 <copy todir="${project.build.directory}/classes/public">
