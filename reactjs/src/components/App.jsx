@@ -15,7 +15,6 @@ class App extends Component {
             services: [],
             bookings: []
         };
-        this.clearDatabase = this.clearDatabase.bind(this);
     }
 
     async componentWillMount() {
@@ -43,16 +42,9 @@ class App extends Component {
             })
     }
 
-    clearDatabase() {
-        fetch("/delete-all", {
-            method: "DELETE"
-        })
-    }
-
     render() {
         return (
             <div id="main-wrapper">
-                <button id="big-red-button" onClick={this.clearDatabase}>Refresh database (for demonstration)</button>
                 <_1_RoomList/>
                 <_2_RoomsByCategory/>
                 {/*<_3_CreateUser/>*/}

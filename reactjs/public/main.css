@@ -32,11 +32,6 @@
     display: block;
 }
 
-#big-red-button{
-    margin-left: 500px;
-    background-color: rgba(219, 0, 4, 0.78);
-}
-
 .user-bookings{
     margin: 0 10px;
     display: inline-block;
