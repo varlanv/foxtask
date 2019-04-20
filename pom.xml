@@ -74,16 +74,6 @@
                     </execution>
                     <execution>
                         <phase>prepare-package</phase>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <phase>prepare-package</phase>
                         <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
