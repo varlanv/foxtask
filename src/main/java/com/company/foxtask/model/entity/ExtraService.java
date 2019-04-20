@@ -16,13 +16,10 @@ public class ExtraService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @JsonIgnoreProperties("extraServices")
     @ManyToMany(mappedBy = "extraServices", fetch = FetchType.LAZY)
     private List<Booking> bookings;
     private String name;
     private String price;
-
-    public ExtraService(String name) {
-        this.name = name;
-    }
 }

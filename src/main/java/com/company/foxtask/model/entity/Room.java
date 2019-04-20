@@ -20,8 +20,11 @@ public class Room {
     private Integer number;
     private boolean available;
     private String price;
+
     @JsonUnwrapped
     @JsonIgnoreProperties("bookings")
     @ManyToOne
     private Category category;
+
+
 }
