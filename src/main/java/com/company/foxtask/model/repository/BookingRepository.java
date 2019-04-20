@@ -10,11 +10,4 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     List<Booking> findAllByUser_Id(Integer id);
 
     List<Booking> findAllByUser_Email(String email);
-
-//    Price calculateTotalPriceByUserId(Integer id);
-
-    interface Price {
-
-        String price();
-    }
 }

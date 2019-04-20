@@ -8,6 +8,7 @@ import _6_TotalPrice from "./_6_TotalPrice";
 import _7_AllBookings from "./_7_AllBookings";
 
 class App extends Component {
+
     constructor(props) {
         super(props);
 
@@ -25,7 +26,6 @@ class App extends Component {
             services: body
         })
     }
-
 
     render() {
         return (

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class _7_AllBookings extends Component {
 
-
     constructor(props) {
         super(props);
 

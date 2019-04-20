@@ -28,7 +28,6 @@ class _5_BookingsView extends Component {
         const {bookings} = this.state;
 
         return (
-
             <div>
                 <h2>5. User can view his booking.</h2>
                 <form onSubmit={this.fetchBookingsByUserId}>
@@ -43,7 +42,6 @@ class _5_BookingsView extends Component {
                     ))}
                 </ul>
             </div>
-
         );
     }
 }

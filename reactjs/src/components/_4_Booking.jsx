@@ -21,9 +21,9 @@ class _4_Booking extends Component {
         this.handleRoomNumber = this.handleRoomNumber.bind(this);
     }
 
-        async handleBook(event) {
+    async handleBook(event) {
         event.preventDefault();
-        const req = await fetch("/book", {
+        fetch("/book", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

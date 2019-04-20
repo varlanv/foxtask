@@ -15,7 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,21 +43,24 @@ public class RoomControllerTest {
 
     @Test
     public void controller_should_find_all_by_category() {
-        Room room1 = RoomTestUtil.createRoom(4, new Category("LUX"));
-        Room room2 = RoomTestUtil.createRoom(2, new Category("DOUBLE"));
-        Room room3 = RoomTestUtil.createRoom(5, new Category("LUX"));
+        Category category1 = new Category("LUX");
+        Category category2 = new Category("DOUBLE");
+        Room room1 = RoomTestUtil.createRoom(4, "", category1);
+        Room room2 = RoomTestUtil.createRoom(2, "", category2);
 
-        List<Room> rooms = Arrays.asList(room1, room2, room3);
+        List<Room> rooms = Arrays.asList(room1, room2);
 
         when(repository.findAllByCategory_NameIgnoreCase("LUX")).thenReturn(rooms.stream()
-                .filter(r -> r.getCategory().equals("LUX"))
+                .filter(r -> r.getCategory().getName().equals("LUX"))
+                .collect(Collectors.toList()));
+        when(repository.findAllByCategory_NameIgnoreCase("DOUBLE")).thenReturn(rooms.stream()
+                .filter(r -> r.getCategory().getName().equals("DOUBLE"))
                 .collect(Collectors.toList()));
 
-
-
-        assertThat(controller.findByCategory("LUX")).allMatch(room -> room.getCategory().equals("LUX"));
-        assertThat(controller.findByCategory("LUX")).noneMatch(room -> room.getCategory().equals("DOUBLE"));
-        assertThat(controller.findByCategory("ABC")).isEmpty();
+        assertEquals(controller.findByCategory("LUX"), singletonList(room1));
+        assertEquals(controller.findByCategory("DOUBLE"), singletonList(room2));
+        assertEquals(controller.findByCategory("LUX").size(), 1);
+        assertEquals(controller.findByCategory("DOUBLE").size(), 1);
 
     }
 }

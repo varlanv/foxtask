@@ -16,9 +16,9 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class BookingControllerTest {
 
-    BookingController controller;
     @Mock
-    BookingService service;
+    private BookingService service;
+    private BookingController controller;
 
     @Before
     public void construct() {
@@ -30,5 +30,12 @@ public class BookingControllerTest {
         BookingDto dto = BookingDtoUtil.buildPopulated();
         controller.book(dto);
         verify(service, only()).performBooking(dto);
+    }
+
+    @Test
+    public void controller_should_call_service_once() {
+        BookingDto bookingDto = BookingDtoUtil.buildPopulated();
+        controller.book(bookingDto);
+        verify(service, only()).performBooking(bookingDto);
     }
 }

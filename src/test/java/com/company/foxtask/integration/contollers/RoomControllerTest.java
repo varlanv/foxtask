@@ -29,36 +29,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RoomControllerTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
     @Autowired
-    ObjectMapper mapper;
+    private ObjectMapper mapper;
     @MockBean
-    RoomRepository repository;
+    private RoomRepository repository;
 
     @Before
     public void mock_repository() {
-        Room room = RoomTestUtil.createRoom(5, new Category("LUX"));
-        Room room2 = RoomTestUtil.createRoom(3, new Category("STANDARD"));
+        Room room = RoomTestUtil.createRoom(5, "", new Category("LUX"));
+        Room room2 = RoomTestUtil.createRoom(3, "", new Category("STANDARD"));
 
         when(repository.findAll()).thenReturn(Arrays.asList(room, room2));
     }
 
     @Test
     public void controller_should_return_200() throws Exception {
-        mockMvc.perform(get("/bookings"))
+        mockMvc.perform(get("/rooms"))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
 
     @Test
     public void controller_should_return_rooms_list() throws Exception {
-        String responseBody = mockMvc.perform(get("/bookings"))
+        String responseBody = mockMvc.perform(get("/rooms"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
         List<Room> list = Arrays.asList(mapper.readValue(responseBody, Room[].class));
 
-        assertThat(list.get(0).getCategory().getName()).isEqualTo("LUX");
-        assertThat(list.get(1).getCategory().getName()).isEqualTo("STANDARD");
+        assertThat(list.get(0).getCategory()).isEqualTo(new Category("LUX"));
+        assertThat(list.get(1).getCategory()).isEqualTo(new Category("STANDARD"));
     }
 }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class _1_RoomList extends Component {
 
-
     constructor(props) {
         super(props);
 
@@ -39,7 +38,6 @@ class _1_RoomList extends Component {
             </div>
         );
     }
-
 }
 
 export default _1_RoomList;

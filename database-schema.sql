@@ -1,26 +1,25 @@
 DROP SCHEMA IF EXISTS foxtask CASCADE;
--- DROP TABLE IF EXISTS category;
--- DROP TABLE IF EXISTS customer;
--- DROP TABLE IF EXISTS room;
--- DROP TABLE IF EXISTS extra_services;
--- DROP TABLE IF EXISTS booking;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS usr;
+DROP TABLE IF EXISTS room;
+DROP TABLE IF EXISTS extra_services;
+DROP TABLE IF EXISTS booking;
 
 CREATE SCHEMA foxtask;
 
 
 CREATE TABLE foxtask.category (
-  id    SERIAL,
-  name  VARCHAR(100) UNIQUE NOT NULL,
-  price DECIMAL,
+  id   SERIAL,
+  name VARCHAR(100) UNIQUE NOT NULL,
 
-  CONSTRAINT category_pkey PRIMARY KEY (id)
+  CONSTRAINT categorya_pkey PRIMARY KEY (id)
 );
 
 
 CREATE TABLE foxtask.extra_services (
-  id            SERIAL,
-  service       VARCHAR(100),
-  service_price DECIMAL,
+  id    SERIAL,
+  name  VARCHAR(100) UNIQUE,
+  price DECIMAL,
 
   CONSTRAINT extra_services_pkey PRIMARY KEY (id)
 );
@@ -28,56 +27,65 @@ CREATE TABLE foxtask.extra_services (
 
 CREATE TABLE foxtask.room (
   number      INT4 UNIQUE NOT NULL,
-  category_id INT4 UNIQUE,
+  category_id INT4,
+  available   BOOLEAN,
+  price       DECIMAL,
 
   CONSTRAINT room_pkey PRIMARY KEY (number),
   CONSTRAINT category_pkey FOREIGN KEY (category_id) REFERENCES foxtask.category (id)
 );
 
 
+CREATE TABLE foxtask.usr (
+  id    SERIAL,
+  email VARCHAR(100),
+
+  CONSTRAINT usr_pkey PRIMARY KEY (id)
+);
+
+
 CREATE TABLE foxtask.booking (
   id                SERIAL,
-  room_id           INT4,
-  extra_services_id INT4,
-  booking_date      DATE,
+  room_number       INT4,
+  booking_date_from TIMESTAMP,
+  booking_date_to   TIMESTAMP,
+  user_id           INT4,
 
   CONSTRAINT booking_pkey PRIMARY KEY (id),
-  CONSTRAINT booking_room_fkey FOREIGN KEY (room_id) REFERENCES foxtask.room (number),
-  CONSTRAINT booking_extra_services_fkey FOREIGN KEY (extra_services_id) REFERENCES foxtask.extra_services (id)
-);
-
-CREATE TABLE foxtask.customer (
-  id          SERIAL,
-  firstname   VARCHAR(100),
-  lastname    VARCHAR(100),
-  bookings_id INT4,
-
-  CONSTRAINT customer_pkey PRIMARY KEY (id),
-  CONSTRAINT customer_bookings_fkey FOREIGN KEY (bookings_id) REFERENCES foxtask.booking (id)
+  CONSTRAINT booking_user_fkey FOREIGN KEY (user_id) REFERENCES foxtask.usr (id),
+  CONSTRAINT booking_room_fkey FOREIGN KEY (room_number) REFERENCES foxtask.room (number)
 );
 
 
-INSERT INTO foxtask.category (name, price) VALUES
-  ('STANDARD', '50'),
-  ('DOUBLE', '75'),
-  ('LUX', '120');
+CREATE TABLE foxtask.extra_services_bookings (
+  booking_id       INT4 REFERENCES foxtask.booking,
+  extra_service_id INT4 REFERENCES foxtask.extra_services,
+
+  CONSTRAINT extra_services_bookings_pkey PRIMARY KEY (booking_id, extra_service_id)
+);
 
 
-INSERT INTO foxtask.room (number, category_id) VALUES
-  ('1', '1'),
-  ('5', '3'),
-  ('10', '2'),
-  ('6', '2'),
-  ('15', '2'),
-  ('20', '1'),
-  ('3', '3'),
-  ('25', '1'),
-  ('21', '3'),
-  ('13', '1'),
-  ('19', '2'),
-  ('22', '3');
+INSERT INTO foxtask.category (name) VALUES
+  ('STANDARD'),
+  ('DOUBLE'),
+  ('LUX');
 
 
-INSERT INTO foxtask.extra_services (service, service_price) VALUES
-  ('cleaning', '10'),
-  ('breakfast', '5');
+INSERT INTO foxtask.room (number, category_id, price, available) VALUES
+  ('1', '1', '50', true),
+  ('5', '3', '120', true),
+  ('10', '2', '75', true),
+  ('6', '2', '75', true),
+  ('15', '2', '75', true),
+  ('20', '1', '50', true),
+  ('3', '3', '120', true),
+  ('25', '1', '50', true),
+  ('21', '3', '120', true),
+  ('13', '1', '50', true),
+  ('19', '2', '75', true),
+  ('22', '3', '120', true);
+
+
+INSERT INTO foxtask.extra_services (name, price) VALUES
+  ('Cleaning', '10'),
+  ('Breakfast', '5');

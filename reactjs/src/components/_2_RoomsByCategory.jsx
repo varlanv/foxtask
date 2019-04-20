@@ -22,8 +22,6 @@ class _2_RoomsByCategory extends Component {
         this.setState({
             categories: body
         });
-
-
     }
 
     async fetchRoomsByCategory(event) {
@@ -50,7 +48,6 @@ class _2_RoomsByCategory extends Component {
             <div>
                 <form onSubmit={this.fetchRoomsByCategory}>
                     <h2>2. View rooms filtered by category.</h2>
-
                     {categories.map(category => (<div>
                             <label htmlFor="category-checkbox">{category.name}</label>
                             <input type="radio" className="category-checkbox" name="name" value={category.name}
@@ -59,8 +56,6 @@ class _2_RoomsByCategory extends Component {
                     ))}
                     <input type="submit" value="Submit"/>
                 </form>
-
-
                 <div className="wrapper">
                     <ul>
                         {rooms.map(room => (
@@ -70,7 +65,6 @@ class _2_RoomsByCategory extends Component {
                         ))}
                     </ul>
                 </div>
-
             </div>
         );
     }

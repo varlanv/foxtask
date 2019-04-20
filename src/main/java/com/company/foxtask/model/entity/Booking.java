@@ -18,12 +18,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_number")
     private Room room;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "bookings"})
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "booking_date_from")
@@ -38,6 +38,6 @@ public class Booking {
             name = "extra_services_bookings",
             joinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "extra_service_id", referencedColumnName = "id"))
-    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ExtraService> extraServices;
 }

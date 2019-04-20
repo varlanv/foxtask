@@ -27,6 +27,7 @@ public class RoomController {
     @GetMapping("/rooms/category/{category}")
     public List<Room> findByCategory(@PathVariable String category) {
         return repository.findAllByCategory_NameIgnoreCase(category);
+
     }
 
 }

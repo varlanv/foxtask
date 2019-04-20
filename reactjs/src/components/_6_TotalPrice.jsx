@@ -28,21 +28,17 @@ class _6_TotalPrice extends Component {
         const {price} = this.state;
 
         return (
-
             <div className="wrapper">
                 <h2>6. User can get the total price of the booking (room for dates period + cost of additional options).</h2>
                 <form onSubmit={this.fetchBookingsByUserId}>
                     <input id="user-id-inputt" type="text" name="id"/>
                     <input type="submit" name="submit"/>
                 </form>
-
                 {price}
-
             </div>
 
         );
     }
 }
-
 
 export default _6_TotalPrice;

@@ -46,7 +46,6 @@ class _3_CreateUser extends Component {
             </div>
         );
     }
-
 }
 
 export default _3_CreateUser;
