@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/**
+ * Main class, responsible for booking operations.
+ */
+
 @Service
 public class BookingService {
 
@@ -48,8 +52,15 @@ public class BookingService {
         return bookingRepository.findAllByUser_Email(email);
     }
 
+    /**
+     * Populates objects with necessary information from {@link BookingDto} and persists it in database.
+     *
+     * @param dto wrapper for booking-related information.
+     * @throws RoomIsTakenException if specified room is unavailable.
+     *
+     */
     @Transactional
-    public void performBooking(BookingDto dto) {
+    public void performBooking(BookingDto dto) throws RoomIsTakenException {
         Booking booking = new Booking();
 
         Room room = roomRepository.getOne(dto.getRoomNumber());
@@ -75,6 +86,13 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
+    /**
+     * Calculates total price for all user's bookings..
+     *
+     * @param email user's email.
+     * @return  total price as String.
+     *
+     */
     public String priceForAllUserBookings(String email) {
         List<Booking> bookings = bookingRepository.findAllByUser_Email(email);
         BigDecimal result = new BigDecimal("0");

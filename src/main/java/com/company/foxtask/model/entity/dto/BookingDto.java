@@ -11,6 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Wrapper for all booking-related information.
+ */
+
 @Data
 @NoArgsConstructor
 public class BookingDto {
